@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AudioBookApp</string>
+    <string name="hello_world"><font fgcolor="#ffff0000">Hello world!</font></string>
+    <string name="some_text">this is <font fgcolor="#ffff0000">red</font></string>
+</resources>

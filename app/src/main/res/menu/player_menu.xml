@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/bookmark"
+        android:title="Bookmark" />
+
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/chapter"
+        android:title="Chapter" />
+
+    <item
+        android:id="@+id/navigation_library"
+        android:icon="@drawable/speed"
+        android:title="Speed 10x" />
+
+    <item
+        android:id="@+id/navigation_download"
+        android:icon="@drawable/download"
+        android:title="Download" />
+
+
+</menu>

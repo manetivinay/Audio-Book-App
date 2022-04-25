@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/small_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="46dp"
+        android:src="@drawable/logo_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/settings_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="30dp"
+        android:src="@drawable/setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/small_icon" />
+
+    <TextView
+        android:id="@+id/app_title_audi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/sf_pro_display_bold"
+        android:lineHeight="28dp"
+        android:text="Audi"
+        android:textColor="#4838D1"
+        android:textFontWeight="700"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/small_icon"
+        app:layout_constraintStart_toEndOf="@id/small_icon"
+        app:layout_constraintTop_toTopOf="@id/small_icon"
+        app:layout_constraintVertical_bias="0.70" />
+
+    <TextView
+        android:id="@+id/app_title_books"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sf_pro_display_light"
+        android:lineHeight="28dp"
+        android:text="Books"
+        android:textColor="#4838D1"
+        android:textFontWeight="300"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/small_icon"
+        app:layout_constraintStart_toEndOf="@id/app_title_audi"
+        app:layout_constraintTop_toTopOf="@id/small_icon"
+        app:layout_constraintVertical_bias="0.70" />
+
+    <TextView
+        android:id="@+id/app_title_book_dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sf_pro_display_light"
+        android:lineHeight="28dp"
+        android:text="."
+        android:textColor="#FF8C00"
+        android:textFontWeight="300"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@id/small_icon"
+        app:layout_constraintStart_toEndOf="@id/app_title_books"
+        app:layout_constraintTop_toTopOf="@id/small_icon"
+        app:layout_constraintVertical_bias="0.70" />
+
+
+    <TextView
+        android:id="@+id/my_books"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:lineHeight="36dp"
+        android:text="My Books"
+        android:textColor="#010104"
+        android:textFontWeight="600"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/small_icon" />
+
+
+    <EditText
+        android:id="@+id/search_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:fontFamily="@font/poppins_medium"
+        android:hint="Search Books or Author"
+        android:lineHeight="21dp"
+        android:paddingLeft="24dp"
+        android:textFontWeight="500"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_books" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_edit_text"
+        tools:itemCount="5"
+        tools:listitem="@layout/card_view_design" />
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        android:foreground="?attr/selectableItemBackground"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation"
+        tools:itemIconTint="#000000"
+        tools:itemTextColor="#000000" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

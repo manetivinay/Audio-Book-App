@@ -1,0 +1,32 @@
+[
+  {
+    "book_title": "The Black Witch",
+    "author_name": "Laurie Forest",
+    "cover_image": "image_placeholder_1",
+    "audio_path": "audio_1"
+  },
+  {
+    "book_title": "A Promised Land",
+    "author_name": "Barrack Obama",
+    "cover_image": "image_placeholder_2",
+    "audio_path": "audio_2"
+  },
+  {
+    "book_title": "Harry Potter and the Prisoner of Azkaban",
+    "author_name": "J.K.Rowling",
+    "cover_image": "image_placeholder_3",
+    "audio_path": "audio_3"
+  },
+  {
+    "book_title": "The Kidnapper's Accomplice",
+    "author_name": "C.J.Archer",
+    "cover_image": "image_placeholder_4",
+    "audio_path": "audio_4"
+  },
+  {
+    "book_title": "Light Mage",
+    "author_name": "A.R.John",
+    "cover_image": "image_placeholder_5",
+    "audio_path": "audio_5"
+  }
+]
