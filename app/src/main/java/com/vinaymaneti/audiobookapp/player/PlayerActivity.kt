@@ -1,4 +1,4 @@
-package com.vinaymaneti.audiobookapp.utils
+package com.vinaymaneti.audiobookapp.player
 
 import android.media.AudioManager
 import android.media.MediaMetadataRetriever
@@ -15,7 +15,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.vinaymaneti.audiobookapp.AudioBooksModel
 import com.vinaymaneti.audiobookapp.R
+import com.vinaymaneti.audiobookapp.utils.AudioBookUtils
 import java.util.concurrent.TimeUnit
+
 
 const val TAG = "PlayerActivity"
 
@@ -59,10 +61,54 @@ class PlayerActivity : AppCompatActivity() {
         bundle?.let {
             model = intent.getParcelableExtra("audioBookModel")!!
             index = intent.getIntExtra("position", 0)
-            Toast.makeText(this@PlayerActivity, "index ::$index", Toast.LENGTH_SHORT).show()
             setUpViews()
         }
 
+        handleMediaPlayer()
+
+        previousLeftBtn.setOnClickListener {
+//            if reached to 0 need to assign values to list size
+            Log.d(TAG, "before ::$index")
+            index -= 1
+            Log.d(TAG, "before ::$index")
+            if(index >=0) {
+                getModelItem()
+                setUpViews()
+                mediaPlayer.stop()
+                playPauseBtn.setImageResource(R.drawable.play)
+                handleMediaPlayer()
+            } else {
+                Toast.makeText(
+                    this@PlayerActivity,
+                    "you have reached to first time, go with next item",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        nextRightBtn.setOnClickListener {
+//            if reached to maxleght need to assign values to initial ist
+            Log.d(TAG, "before ::$index")
+            index += 1
+            Log.d(TAG, "before ::$index")
+            if(index <= 5) {
+                getModelItem()
+                setUpViews()
+                mediaPlayer.stop()
+                playPauseBtn.setImageResource(R.drawable.play)
+                handleMediaPlayer()
+            } else {
+                Toast.makeText(
+                    this@PlayerActivity,
+                    "you have reached to last time, go with previous item",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+    }
+
+    private fun handleMediaPlayer() {
         try {
             mediaPlayer = MediaPlayer()
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC) //set streaming according to ur needs
@@ -73,6 +119,28 @@ class PlayerActivity : AppCompatActivity() {
                 Uri.parse(("android.resource://$packageName/raw/$rid"))
             )
             mediaPlayer.isLooping = true
+            mediaPlayer.setOnPreparedListener { mp ->
+                if (mp == mediaPlayer) {
+                    runnable = Runnable {
+                        seekBar.progress = mediaPlayer.currentPosition
+                        val getCurrent = mediaPlayer?.currentPosition
+                        startTimer?.setText(
+                            String.format(
+                                "%02d:%02d ",
+                                TimeUnit.MILLISECONDS.toMinutes(getCurrent?.toLong() as Long),
+                                TimeUnit.MILLISECONDS.toSeconds(getCurrent?.toLong()) -
+                                        TimeUnit.MINUTES.toSeconds(
+                                            TimeUnit.MILLISECONDS.toMinutes(getCurrent?.toLong())
+                                        )
+                            )
+                        )
+                        endTimer?.text = getAudioFileLength()
+                        handler.postDelayed(runnable, 1000)
+                    }
+                    handler.postDelayed(runnable, 1000)
+                }
+
+            }
             mediaPlayer.prepare()
 
             // add the maximum value of our seekbar the duration of the album
@@ -106,43 +174,13 @@ class PlayerActivity : AppCompatActivity() {
 
         })
 
-        runnable = Runnable {
-            seekBar.progress = mediaPlayer.currentPosition
-            val getCurrent = mediaPlayer?.currentPosition
-            startTimer?.setText(
-                String.format(
-                    "%02d:%02d ",
-                    TimeUnit.MILLISECONDS.toMinutes(getCurrent?.toLong() as Long),
-                    TimeUnit.MILLISECONDS.toSeconds(getCurrent?.toLong()) -
-                            TimeUnit.MINUTES.toSeconds(
-                                TimeUnit.MILLISECONDS.toMinutes(getCurrent?.toLong())
-                            )
-                )
-            )
-            endTimer?.text = getAudioFileLength()
-            handler.postDelayed(runnable, 1000)
-        }
-        handler.postDelayed(runnable, 1000)
+
+
 
         mediaPlayer.setOnCompletionListener {
             playPauseBtn.setImageResource(R.drawable.play)
             seekBar.progress = 0
         }
-
-//        previousLeftBtn.setOnClickListener {
-//            if reached to 0 need to assign values to list size
-//            index -= 1
-//            getModelItem()
-//            setUpViews()
-//        }
-//
-//        nextRightBtn.setOnClickListener {
-//            if reached to maxleght need to assign values to initial ist
-//            index += index
-//            getModelItem()
-//            setUpViews()
-//        }
-
     }
 
     private fun setUpViews() {
@@ -192,6 +230,8 @@ class PlayerActivity : AppCompatActivity() {
         }
         return stringBuilder.toString()
     }
+
+
 
     override fun onPause() {
         super.onPause()

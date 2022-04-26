@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.vinaymaneti.audiobookapp.player.PlayerActivity
 import com.vinaymaneti.audiobookapp.utils.AudioBookUtils
-import com.vinaymaneti.audiobookapp.utils.PlayerActivity
 
 
 const val TAG = "MainActivity"
